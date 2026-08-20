@@ -94,7 +94,7 @@ $menu = file_get_contents($template_dir . 'menu');
 $now = getdate();
 $last_year = $now['year'] - 1;
 $start_date = $last_year . '-' . $now['mon'] . '-01'; // First day of this month last year
-$ts = time() - 60 * 60 * 24 * 21; // 21 days ago
+$ts = time() - 60 * 60 * 24 * 8; // 8 days ago
 $dt = new DateTime("@$ts");
 $end_date = $dt->format('Y-m-d');
 
