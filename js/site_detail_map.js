@@ -149,7 +149,7 @@ function rssac002_make_chart(map_date){
     end_date: map_date,
   };
 
-  $.getJSON("https://code.highcharts.com/mapdata/custom/world-continents.topo.json", function(topology){
+  $.getJSON("js/hs/world-continents.topo.json.js", function(topology){
     options.chart.map = topology;    
     $.ajax({
       url: "/api/v1/instances-detail",
