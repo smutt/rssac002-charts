@@ -35,7 +35,6 @@ function rssac002_update_chart(){
       series: {
         pointStart: Date.UTC('2015', '02', '02'),  // Jan is zero'th month in JS
         pointInterval: 86400000, // 1 day in ms
-        connectNulls: true,
       },
     },
     series: [{}]
@@ -72,17 +71,25 @@ function rssac002_update_chart(){
       var totals = {};
       totals.data = [];
       $.each(res, function(date, _){
-        if(ip_version == '4'){
-          totals.data.push(res[date]['ipv4']);
-        }else if(ip_version == '6'){
-          totals.data.push(res[date]['ipv6']);
-        }else if(ip_version =='dual'){
-          totals.data.push(Math.min(res[date]['ipv4'], res[date]['ipv6']));
+        if(res[date] == null){
+          ipv4 = ipv4;
+          ipv6 = ipv6;
         }else{
-          totals.data.push(Math.max(res[date]['ipv4'], res[date]['ipv6']));
+          ipv4 = res[date]['ipv4'];
+          ipv6 = res[date]['ipv6'];
+        }
+
+        if(ip_version == '4'){
+          totals.data.push(ipv4);
+        }else if(ip_version == '6'){
+          totals.data.push(ipv6);
+        }else if(ip_version =='dual'){
+          totals.data.push(Math.min(ipv4,ipv6));
+        }else{
+          totals.data.push(Math.max(ipv4, ipv6));
         }
       });
-      
+
       options.series.push(totals);
       new Highcharts.Chart(options);
     }});
