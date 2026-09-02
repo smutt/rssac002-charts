@@ -36,7 +36,10 @@ function rssac002_make_chart(map_date){
       text: 'Source: https://root-servers.org'
     },
     mapNavigation: {
-      enabled: true,
+      enabled: false,
+      enableButtons: false, // Set to true once clustering is fixed. It broke after upgrading Highcharts from 11.4.
+      enableMouseWheelZoom: false,
+      enableTouchZoom: false,
       buttonOptions: {
         verticalAlign: 'bottom'
       }
@@ -150,7 +153,7 @@ function rssac002_make_chart(map_date){
   };
 
   $.getJSON("js/hs/world-continents.topo.json.js", function(topology){
-    options.chart.map = topology;    
+    options.chart.map = topology;
     $.ajax({
       url: "/api/v1/instances-detail",
       type: "GET",
