@@ -1,19 +1,14 @@
 <div class="main">
 <div hidden id="end_date">@END_DATE@</div>
 
-
-<figure class="highcharts-figure">
-<div class="rchart" id="container"></div>
-</figure>
-
+<div class="wrapper">
+<div class="left-inline">
 <div class="radios">
-<br/>
 <b>Time Interval</b><br/>
 <input type="radio" id="int_day" name="time_interval" value="day" onClick="rssac002_update_chart()">
 <label for="int_day">Day</label><br/>
 <input type="radio" id="int_week" name="time_interval" value="week" onClick="rssac002_update_chart()" checked>
-<label for="int_week">Week</label><br/>
-<br/>
+<label for="int_week">Week</label><br/><br/>
 
 <b>IP Version</b><br/>
 <input type="radio" id="ipv_4" name="ip_version" value="4" onClick="rssac002_update_chart()" checked>
@@ -22,8 +17,12 @@
 <label for="ipv_6">IPv6 (/64)</label><br/>
 <input type="radio" id="ipv_both" name="ip_version" value="both" onClick="rssac002_update_chart()">
 <label for="ipv_both">Both</label><br/>
+</div>
+</div>
 
-<br/>
+<figure class="highcharts-figure">
+<div class="rchart" id="container"></div>
+</figure>
 
 </div>
 </div>

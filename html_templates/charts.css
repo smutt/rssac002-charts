@@ -23,7 +23,7 @@
 .left-inline {
   float: left;
   position: fixed;
-  bottom: 0;
+  bottom: 30%;
 }
 .right-inline {}
 

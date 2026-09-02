@@ -2,9 +2,8 @@
 <div hidden id="end_date">@END_DATE@</div>
 <div hidden id="direction">sent</div>
 
-<figure class="highcharts-figure">
-<div class="rchart" id="container"></div>
-</figure>
+<div class="wrapper">
+<div class="left-inline">
 
 <div class="radios">
 <br/>
@@ -20,5 +19,12 @@
 <label for="type_line">Single Line</label><br/>
 <input type="radio" id="type_stacked" name="chart_type" value="stacked" onClick="rssac002_update_chart()">
 <label for="type_stacked">Stacked Area</label><br/>
+</div>
+</div>
+
+<figure class="highcharts-figure">
+<div class="rchart" id="container"></div>
+</figure>
+
 </div>
 </div>

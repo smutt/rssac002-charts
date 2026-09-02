@@ -1,10 +1,8 @@
 <div class="main">
 <div hidden id="end_date">@END_DATE@</div>
 
-<figure class="highcharts-figure">
-<div class="rchart" id="container"></div>
-</figure>
-
+<div class="wrapper">
+<div class="left-inline">
 <div class="radios">
 
 <b>Time Interval</b><br/>
@@ -21,6 +19,13 @@
 <label for="ipv_6">IPv6 (/64)</label><br/>
 <input type="radio" id="ipv_both" name="ip_version" value="both" onClick="rssac002_update_chart()">
 <label for="ipv_both">Both</label><br/>
+
+</div>
+</div>
+
+<figure class="highcharts-figure">
+<div class="rchart" id="container"></div>
+</figure>
 
 </div>
 </div>
