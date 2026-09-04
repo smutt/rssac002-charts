@@ -1,4 +1,4 @@
-/* Copyright Andrew McConachie <andrew@depht.com> 2021 2024 */
+/* Copyright Andrew McConachie <andrew@depht.com> 2021 2024 2026 */
 
 $(document).ready(function() {
   rssac002_update_chart();
@@ -31,9 +31,6 @@ function rssac002_update_chart(){
         text: ''
       },
       labels: {
-        formatter: function () {
-          return this.value / 1000000000;
-        }
       }
     },
     plotOptions: {
@@ -49,11 +46,18 @@ function rssac002_update_chart(){
   var direction = document.getElementById('direction').textContent;
   var end_date = document.getElementById('end_date').textContent;
   var time_interval = document.querySelector('input[name = "time_interval"]:checked').value;
+  var chart_y = document.querySelector('input[name = "chart_y"]:checked').value;
 
   // Determine request JSON based on time_interval
   if(time_interval == 'day'){
-    var denominator = 1;
-    var suffix_text = ' per-day (billion)';
+    if(chart_y == 'qps'){
+      var suffix_text = 'per-second (daily average)';
+      var denominator = 86400;
+    }else{
+      var denominator = 1;
+      var suffix_text = ' per-day (billion)';
+    }
+
     options.plotOptions.series.pointInterval =  86400000; // 1 day in ms
     var req_data = {
       rsi: 'a-m',
@@ -62,8 +66,14 @@ function rssac002_update_chart(){
       sum: true,
     };
   }else{
-    var denominator = 7;
-    var suffix_text = ' by-week (billion) (daily-average)';
+    if(chart_y == 'qps'){
+      var suffix_text = 'per-second (weekly average)';
+      var denominator = 604800; // Seconds in a week
+    }else{
+      var denominator = 7;
+      var suffix_text = ' by-week (billion) (daily-average)';
+    }
+
     options.plotOptions.series.pointInterval = 604800000; // 1 week in ms
     var tooltip = {
       valueDecimals: 0,
@@ -81,14 +91,21 @@ function rssac002_update_chart(){
     };
   }
 
+  if(chart_y == 'qps'){
+    var y_suffix_text = 'per-second';
+  }else{
+    var y_suffix_text = '';
+    options.yAxis.labels.formatter = function () { return this.value / 1000000000; };
+  }
+
   if(direction == 'received'){
     var key_str = 'queries-received';
-    var title_str = 'queries';
-    options.yAxis.title.text = title_str;
+    var title_str = 'Queries ';
+    options.yAxis.title.text = title_str + y_suffix_text;
   }else{
     var key_str = 'responses-sent';
-    var title_str = 'responses';
-    options.yAxis.title.text = title_str;
+    var title_str = 'Responses ';
+    options.yAxis.title.text = title_str + y_suffix_text;
   }
 
   $.ajax({

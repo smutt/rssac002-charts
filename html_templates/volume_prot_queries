@@ -11,7 +11,12 @@
 <input type="radio" id="int_week" name="time_interval" value="week" onClick="rssac002_update_chart()" checked>
 <label for="int_week">Week</label><br/>
 <br/>
-
+<b>Y-Axis</b><br/>
+<input type="radio" id="y_qps" name="chart_y" value="qps" onClick="rssac002_update_chart()">
+<label for="y_qps">QPS</label><br/>
+<input type="radio" id="y_total" name="chart_y" value="total" onClick="rssac002_update_chart()" checked>
+<label for="y_total">Totals</label><br/>
+<br/>
 </div>
 </div> <!-- Closes left-inline -->
 
